@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bestel je box · Bubbles &amp; Bites</title>
+<meta name="description" content="Kies je box, je eerste bezorgdag en je extra's. Bezorgd in Haarlem, Haarlemmermeer en omgeving.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2B2438">
+<link rel="icon" type="image/png" href="/assets/logo-header.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Lora:wght@400;500&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --plum:#2B2438; --plum2:#3a3049; --gold:#B08D57; --champ:#FAF6EE; --linen:#EDE4D3; --line:rgba(250,246,238,.45); --soft:rgba(250,246,238,.78); --err:#E9C2A6; }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--champ);color:var(--plum);font-family:'Lora',Georgia,serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1240px;margin:0 auto;padding-left:clamp(20px,5vw,56px);padding-right:clamp(20px,5vw,56px)}
+  .eyebrow{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:500;letter-spacing:.34em;text-transform:uppercase;color:var(--gold)}
+  .label{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:500;letter-spacing:.3em;text-transform:uppercase}
+  .btn{display:inline-block;cursor:pointer;border:0;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--plum);background-color:var(--champ);background-image:linear-gradient(105deg,transparent 35%,rgba(176,141,87,.45) 50%,transparent 65%);background-size:250% 100%;background-position:120% 0;background-repeat:no-repeat;transition:background-position .9s ease;padding:18px 32px}
+  .btn:hover{background-position:-20% 0}
+  .btn[disabled]{opacity:.6;cursor:wait}
+  .link{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;border-bottom:1px solid var(--gold);padding-bottom:6px;background:none;border-top:0;border-left:0;border-right:0;color:inherit;cursor:pointer}
+  .link:hover{color:var(--gold)}
+
+  header.top{position:sticky;top:0;z-index:20;background:rgba(250,246,238,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--linen)}
+  header.top .wrap{padding-top:14px;padding-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  header.top img{height:56px;width:auto;display:block}
+  nav.main{display:flex;align-items:center;gap:clamp(16px,3vw,36px);flex-wrap:wrap;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:500;letter-spacing:.28em;text-transform:uppercase}
+  nav.main a:hover{color:var(--gold)}
+  .langs{display:inline-flex;align-items:center;gap:6px;font-weight:600;letter-spacing:.2em}
+  .langs button{background:none;border:0;padding:4px 2px;cursor:pointer;color:inherit;font:inherit;letter-spacing:inherit;opacity:.55;border-bottom:1px solid transparent}
+  .langs button.on{opacity:1;border-bottom-color:var(--gold)}
+
+  section.dark{background:var(--plum);color:var(--champ)}
+  .hero .wrap{padding-top:clamp(56px,7vw,96px);padding-bottom:clamp(32px,4vw,48px);display:flex;flex-direction:column;gap:22px;max-width:1240px}
+  h1{margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(52px,7vw,92px);line-height:1.02}
+  .rule{width:48px;height:1px;background:var(--gold)}
+  .intro{margin:0;font-size:18px;line-height:1.7;max-width:560px}
+
+  .grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:clamp(40px,6vw,88px);align-items:start;padding-top:clamp(24px,3vw,40px);padding-bottom:clamp(64px,8vw,112px)}
+  @media (max-width:960px){.grid{grid-template-columns:1fr}}
+  form{display:flex;flex-direction:column;gap:56px;min-width:0}
+  fieldset{border:0;margin:0;padding:0;min-width:0;display:flex;flex-direction:column;gap:22px}
+  legend{padding:0;margin-bottom:22px;display:flex;flex-direction:column;gap:10px}
+  legend h2{margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,4vw,46px);line-height:1.08}
+  .hint{margin:0;font-size:14px;line-height:1.6;color:var(--soft)}
+
+  .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+  .choice{position:relative;display:flex;flex-direction:column;gap:8px;padding:22px 20px;border:1px solid var(--line);cursor:pointer;transition:border-color .3s, background .3s}
+  .choice:hover{border-color:var(--gold)}
+  .choice input{position:absolute;opacity:0;pointer-events:none}
+  .choice.on{border-color:var(--gold);background:rgba(176,141,87,.12)}
+  .choice .name{font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.1}
+  .choice .price{white-space:nowrap;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;letter-spacing:.08em}
+  .choice .note{font-size:14px;line-height:1.55;color:var(--soft)}
+  .badge{align-self:flex-start;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;background:var(--gold);color:var(--plum);padding:4px 8px}
+  .rows{display:flex;flex-direction:column;gap:12px}
+  .row{flex-direction:row;align-items:center;justify-content:space-between;gap:16px}
+  .row .name{font-family:'Lora',serif;font-size:17px}
+  .tick{display:flex;gap:14px;align-items:flex-start;cursor:pointer;font-size:15px;line-height:1.6}
+  .tick input{accent-color:var(--gold);width:18px;height:18px;margin:3px 0 0;flex:none}
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{position:relative;cursor:pointer;border:1px solid var(--line);padding:10px 16px;font-size:15px;transition:border-color .3s, background .3s}
+  .chip:hover{border-color:var(--gold)}
+  .chip input{position:absolute;opacity:0;pointer-events:none}
+  .chip.on{border-color:var(--gold);background:rgba(176,141,87,.18)}
+  .dates{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+  .dates .chip{text-align:left;display:flex;flex-direction:column;gap:2px}
+  .dates .chip small{font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--soft)}
+
+  .field{display:flex;flex-direction:column;gap:10px;min-width:0}
+  .field input,.field select,.field textarea{background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--champ);font-family:'Lora',serif;font-size:18px;padding:10px 0;outline:none;border-radius:0;width:100%}
+  .field textarea{resize:vertical;min-height:52px;font-size:16px}
+  .field select{cursor:pointer;-webkit-appearance:none;appearance:none}
+  .field select option{color:var(--plum)}
+  .field input:focus,.field select:focus,.field textarea:focus{border-bottom-color:var(--gold)}
+  .field input::placeholder,.field textarea::placeholder{color:rgba(250,246,238,.45)}
+  .field.bad input,.field.bad select{border-bottom-color:var(--err)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .addr{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:24px}
+  .phone{display:grid;grid-template-columns:120px 1fr;gap:18px}
+  .dob{display:flex;gap:14px}
+  .dob input{width:64px;text-align:center}
+  .dob input.y{width:92px}
+  @media (max-width:560px){.two,.addr{grid-template-columns:1fr 1fr}.addr .street-col{grid-column:1/-1}}
+  .found{border-left:2px solid var(--gold);padding:12px 16px;font-size:16px;line-height:1.6;background:rgba(176,141,87,.1)}
+  .found b{font-weight:500}
+  .msg{margin:0;font-size:14px;line-height:1.55;color:var(--err)}
+  .hidden{display:none !important}
+
+  aside.summary{position:sticky;top:110px;background:var(--champ);color:var(--plum);padding:32px 28px;display:flex;flex-direction:column;gap:18px}
+  @media (max-width:960px){aside.summary{position:static;order:-1}}
+  aside .sum-title{font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1.1;margin:0}
+  aside dl{margin:0;display:flex;flex-direction:column;gap:10px;font-size:15px}
+  aside dl div{display:flex;justify-content:space-between;gap:12px}
+  aside dt{color:rgba(43,36,56,.75)}
+  aside dd{margin:0;text-align:right}
+  aside .total{border-top:1px solid var(--linen);padding-top:16px;display:flex;justify-content:space-between;align-items:baseline}
+  aside .total strong{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:500}
+  aside .small{margin:0;font-size:13px;line-height:1.6;color:rgba(43,36,56,.75)}
+
+  .submit{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+
+  .done .wrap{padding-top:clamp(72px,10vw,140px);padding-bottom:clamp(72px,10vw,140px);display:flex;flex-direction:column;gap:26px;max-width:880px}
+  .done p{margin:0;font-size:19px;line-height:1.7;max-width:600px}
+
+  footer{background:var(--plum);color:var(--champ);border-top:1px solid rgba(176,141,87,.4)}
+  footer .wrap{padding-top:64px;padding-bottom:40px;display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center}
+  footer img{width:150px;height:auto}
+  footer .legal{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:500;letter-spacing:.24em;text-transform:uppercase}
+  footer .legal a{border-bottom:1px solid rgba(176,141,87,.6);padding-bottom:3px;color:rgba(250,246,238,.85)}
+  footer .fine{font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:rgba(250,246,238,.7)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a href="/"><img src="/assets/logo-header.png" alt="Bubbles &amp; Bites"></a>
+    <nav class="main">
+      <a href="/how-it-works" data-t="navHow"></a>
+      <a href="/the-box" data-t="navBox"></a>
+      <a href="/questions" data-t="navFaq"></a>
+      <span class="langs"><button type="button" data-lang="nl" aria-label="Nederlands">NL</button><span style="opacity:.4">|</span><button type="button" data-lang="en" aria-label="English">EN</button></span>
+    </nav>
+  </div>
+</header>
+
+<!-- ORDER FORM -->
+<div id="orderView">
+  <section class="dark hero">
+    <div class="wrap">
+      <div class="eyebrow" data-t="eyebrow"></div>
+      <h1 data-t="title"></h1>
+      <div class="rule"></div>
+      <p class="intro" data-t="intro"></p>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="wrap grid">
+      <form id="orderForm" novalidate>
+
+        <fieldset>
+          <legend><span class="eyebrow" data-t="s1eyebrow"></span><h2 data-t="s1title"></h2></legend>
+          <div class="plans" id="plans"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span class="eyebrow" data-t="s2eyebrow"></span><h2 data-t="s2title"></h2></legend>
+          <div class="label" data-t="afLabel"></div>
+          <div class="rows" id="afRows"></div>
+          <label class="choice row" id="bitesRow">
+            <input type="checkbox" id="extraBites">
+            <span class="name" data-t="bites"></span>
+            <span class="price" id="bitesPrice"></span>
+          </label>
+          <div class="label" style="margin-top:12px" data-t="allergyLabel"></div>
+          <p class="hint" data-t="allergyHint"></p>
+          <div class="chips" id="allergyChips"></div>
+          <div class="field"><input type="text" id="allergyOther" maxlength="300" data-ph="allergyOther"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span class="eyebrow" data-t="s3eyebrow"></span><h2 data-t="s3title"></h2></legend>
+          <p class="hint" data-t="dateHint"></p>
+          <div class="dates" id="dates"></div>
+          <p class="msg hidden" id="dateMsg"></p>
+        </fieldset>
+
+        <fieldset>
+          <legend><span class="eyebrow" data-t="s4eyebrow"></span><h2 data-t="s4title"></h2></legend>
+          <div class="two">
+            <label class="field"><span class="label" data-t="firstName"></span><input type="text" id="firstName" autocomplete="given-name" maxlength="80"></label>
+            <label class="field"><span class="label" data-t="lastName"></span><input type="text" id="lastName" autocomplete="family-name" maxlength="80"></label>
+          </div>
+          <label class="field"><span class="label" data-t="email"></span><input type="email" id="email" autocomplete="email" maxlength="120" data-ph="emailPh"></label>
+          <div class="field">
+            <span class="label" data-t="phone"></span>
+            <div class="phone">
+              <select id="phoneCode" aria-label="Country code"></select>
+              <input type="tel" id="phone" autocomplete="tel-national" maxlength="16" data-ph="phonePh">
+            </div>
+          </div>
+
+          <div class="addr">
+            <label class="field street-col"><span class="label" data-t="postcode"></span><input type="text" id="postcode" autocomplete="postal-code" maxlength="7" placeholder="2011 AB"></label>
+            <label class="field"><span class="label" data-t="houseNumber"></span><input type="text" id="houseNumber" inputmode="numeric" maxlength="5" placeholder="12"></label>
+            <label class="field"><span class="label" data-t="addition"></span><input type="text" id="addition" maxlength="6" data-ph="additionPh"></label>
+          </div>
+          <div id="addrFound" class="found hidden" aria-live="polite"></div>
+          <p class="msg hidden" id="addrMsg" aria-live="polite"></p>
+          <button type="button" class="link hidden" id="manualBtn" style="align-self:flex-start" data-t="manualBtn"></button>
+          <div id="manualFields" class="two hidden">
+            <label class="field"><span class="label" data-t="street"></span><input type="text" id="street" autocomplete="address-line1" maxlength="120"></label>
+            <label class="field"><span class="label" data-t="city"></span><input type="text" id="city" autocomplete="address-level2" maxlength="80"></label>
+          </div>
+          <label class="field"><span class="label" data-t="notes"></span><textarea id="notes" maxlength="500" data-ph="notesPh"></textarea></label>
+
+          <div class="field">
+            <span class="label" data-t="dob"></span>
+            <div class="dob">
+              <input type="text" id="dobD" inputmode="numeric" maxlength="2" placeholder="DD" aria-label="Day">
+              <input type="text" id="dobM" inputmode="numeric" maxlength="2" placeholder="MM" aria-label="Month">
+              <input type="text" id="dobY" class="y" inputmode="numeric" maxlength="4" data-ph="yyyy" aria-label="Year">
+            </div>
+            <p class="hint" data-t="dobHint"></p>
+          </div>
+          <label class="tick"><input type="checkbox" id="terms"><span data-t-html="terms"></span></label>
+        </fieldset>
+
+        <div class="submit">
+          <p class="msg hidden" id="formMsg" role="alert"></p>
+          <button type="submit" class="btn" id="payBtn"></button>
+          <p class="hint" data-t="payHint"></p>
+        </div>
+      </form>
+
+      <aside class="summary" aria-live="polite">
+        <p class="eyebrow" style="margin:0" data-t="sumEyebrow"></p>
+        <p class="sum-title" id="sumPlan"></p>
+        <dl id="sumLines"></dl>
+        <div class="total"><span class="label" data-t="today"></span><strong id="sumTotal"></strong></div>
+        <p class="small" id="sumNext"></p>
+      </aside>
+    </div>
+  </section>
+</div>
+
+<!-- AFTER PAYMENT -->
+<section class="dark done hidden" id="doneView">
+  <div class="wrap">
+    <div class="eyebrow" id="doneEyebrow"></div>
+    <h1 id="doneTitle"></h1>
+    <div class="rule"></div>
+    <p id="doneText"></p>
+    <a href="/order" class="link hidden" id="doneRetry" style="align-self:flex-start;color:#FAF6EE" data-t="retry"></a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="/assets/logo-footer.png" alt="Bubbles &amp; Bites">
+    <p style="margin:0;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:26px" data-t="footerLine"></p>
+    <div class="legal">
+      <a data-href="terms" data-t="footTerms"></a>
+      <a data-href="privacy" data-t="footPrivacy"></a>
+      <a href="mailto:info@bubbles-bites.com">info@bubbles-bites.com</a>
+    </div>
+    <div class="fine" data-t="footFine"></div>
+  </div>
+</footer>
+
+<script src="/lib/config.js"></script>
+<script>
+(function () {
+  const C = window.BNB_CONFIG;
+  const $ = id => document.getElementById(id);
+
+  // ---------- Texts ----------
+  const T = {
+    nl: {
+      navHow: 'Zo werkt het', navBox: 'De box', navFaq: 'Vragen',
+      eyebrow: 'Bestellen', title: 'Jouw pauze,<br>in een box.',
+      intro: 'Kies je box, maak hem helemaal van jou en kies wanneer we hem komen brengen. Betalen doe je veilig via iDEAL.',
+      s1eyebrow: '01 · Je box', s1title: 'Welke box past bij jullie?',
+      s2eyebrow: '02 · Maak hem van jou', s2title: 'Extra’s en allergieën',
+      afLabel: 'Alcoholvrij',
+      af_none: 'Gewoon de bubbels', af_replace: 'Alcoholvrije fles in plaats van de bubbels', af_extra: 'Een alcoholvrije fles erbij',
+      bites: 'Hapjes voor vier in plaats van twee',
+      allergyLabel: 'Allergieën', allergyHint: 'Tik alles aan wat voor jullie geldt. We houden er rekening mee bij de hapjes.',
+      allergies: { gluten: 'Gluten', dairy: 'Melk / lactose', egg: 'Ei', nuts: 'Noten', peanuts: 'Pinda', fish: 'Vis', shellfish: 'Schaaldieren', soy: 'Soja', sesame: 'Sesam' },
+      allergyOther: 'Iets anders? Schrijf het hier',
+      s3eyebrow: '03 · Bezorging', s3title: 'Wanneer brengen we je eerste box?',
+      dateHint: 'We bezorgen op vrijdag en zaterdag tussen 9.00 en 17.00. Bij een pakket komt je box daarna elke maand op dezelfde dag.',
+      s4eyebrow: '04 · Je gegevens', s4title: 'Waar mogen we aanbellen?',
+      firstName: 'Voornaam', lastName: 'Achternaam', email: 'E-mail', emailPh: 'jij@voorbeeld.nl',
+      phone: 'Telefoon', phonePh: '6 12345678',
+      postcode: 'Postcode', houseNumber: 'Huisnummer', addition: 'Toevoeging', additionPh: 'A',
+      street: 'Straat', city: 'Plaats', manualBtn: 'Klopt niet? Typ je adres zelf',
+      searching: 'We zoeken je adres…', notFound: 'We vinden dit adres niet. Controleer je postcode en huisnummer, of typ je adres zelf.',
+      lookupDown: 'Adres zoeken lukt nu even niet. Typ je straat en plaats hieronder.',
+      outside: 'Voorlopig bezorgen we alleen in Haarlem, Haarlemmermeer en omgeving. Deze postcode kunnen we nog niet bereiken. Zet je op de <a href="/waiting-list" style="border-bottom:1px solid #B08D57">wachtlijst</a>, dan laten we het weten zodra we dichterbij komen.',
+      pickAddition: 'Kies je toevoeging:',
+      notes: 'Opmerking voor de bezorging', notesPh: 'Bijvoorbeeld: bel twee keer, of de achterdeur',
+      dob: 'Geboortedatum', yyyy: 'JJJJ', dobHint: 'Onze boxen bevatten alcohol, dus we controleren je leeftijd. We bewaren je geboortedatum niet.',
+      terms: 'Ik ga akkoord met de <a href="/algemene-voorwaarden" target="_blank" style="border-bottom:1px solid #B08D57">algemene voorwaarden</a> en het <a href="/privacybeleid" target="_blank" style="border-bottom:1px solid #B08D57">privacybeleid</a>, en ik geef toestemming om mijn allergie-informatie te gebruiken voor het samenstellen van mijn box.',
+      pay: 'Naar betalen', payHint: 'Je betaalt nu alleen je eerste box. Bij een pakket worden de volgende boxen automatisch afgeschreven; je krijgt altijd eerst een mail.',
+      sumEyebrow: 'Je bestelling', today: 'Vandaag', firstDelivery: 'Eerste bezorging', pickDate: 'Nog kiezen',
+      perBox: 'per box', box: 'Box', alcoholFree: 'Alcoholvrij', biteslabel: 'Hapjes voor vier',
+      nextSingle: 'Eenmalige bestelling. Er is niets op te zeggen.',
+      nextThree: 'Daarna 2 boxen van {p}, steeds een week voor bezorging afgeschreven. Eén keer pauzeren kan.',
+      nextYearly: 'Daarna 10 boxen van {p}; de 12e box is gratis. Steeds een week voor bezorging afgeschreven. Tot 2 keer overslaan kan.',
+      plans: {
+        single: ['Single Box', 'Eén box, eenmalig. Niets om op te zeggen.'],
+        three: ['3-Maanden pakket', '3 boxen, één per maand. Eén keer pauzeren kan.'],
+        yearly: ['Jaarpakket', '12 boxen, de 12e is gratis. Tot 2 keer overslaan.']
+      },
+      free: '12e box gratis',
+      errors: {
+        plan: 'Kies een box.', date: 'Kies je eerste bezorgdag.', name: 'Vul je voor- en achternaam in.', email: 'Vul een geldig e-mailadres in.',
+        phone: 'Vul een geldig telefoonnummer in.', postcode: 'Vul een geldige postcode in, bijvoorbeeld 2011 AB.', houseNumber: 'Vul je huisnummer in.',
+        address: 'Vul je straat en plaats in.', outside: 'We bezorgen nog niet op deze postcode.', dob: 'Vul een geldige geboortedatum in.',
+        under18: 'Je moet 18 jaar of ouder zijn om te bestellen.', terms: 'Ga akkoord met de voorwaarden om verder te gaan.',
+        server: 'Er ging iets mis bij het starten van de betaling. Probeer het nog een keer, of mail ons op info@bubbles-bites.com.'
+      },
+      sending: 'Even geduld…',
+      doneEyebrow: 'Je bestelling', checking: 'We controleren je betaling…', checkingText: 'Een moment, dit duurt meestal maar een paar seconden.',
+      paidTitle: 'Dank je wel{n}.', paidText: 'Je betaling is gelukt. Je bestelnummer is {o}. We sturen je een bevestiging per mail, en op de dag zelf laten we je weten hoe laat we langskomen.',
+      openTitle: 'Bijna klaar.', openText: 'We hebben je betaling nog niet binnen. Zodra die rond is, krijg je een bevestiging per mail. Bestelnummer: {o}.',
+      failTitle: 'Dat ging niet goed.', failText: 'Je betaling is niet gelukt of geannuleerd, dus er is niets afgeschreven. Je kunt het gewoon opnieuw proberen.',
+      retry: 'Opnieuw bestellen',
+      footerLine: 'Vanavond, even pauze.', footTerms: 'Algemene voorwaarden', footPrivacy: 'Privacybeleid', footFine: 'Geen 18, geen alcohol · © 2026 Bubbles & Bites',
+      termsHref: '/algemene-voorwaarden', privacyHref: '/privacybeleid', locale: 'nl-NL'
+    },
+    en: {
+      navHow: 'How it works', navBox: 'The box', navFaq: 'Questions',
+      eyebrow: 'Order', title: 'Your pause,<br>in a box.',
+      intro: 'Choose your box, make it yours and pick the day we bring it. You pay safely with iDEAL.',
+      s1eyebrow: '01 · Your box', s1title: 'Which box suits you?',
+      s2eyebrow: '02 · Make it yours', s2title: 'Extras and allergies',
+      afLabel: 'Alcohol-free',
+      af_none: 'Just the bubbly', af_replace: 'An alcohol-free bottle instead of the bubbly', af_extra: 'Add an alcohol-free bottle',
+      bites: 'Bites for four instead of two',
+      allergyLabel: 'Allergies', allergyHint: 'Tick everything that applies to you. We take it into account for the bites.',
+      allergies: { gluten: 'Gluten', dairy: 'Milk / lactose', egg: 'Egg', nuts: 'Tree nuts', peanuts: 'Peanuts', fish: 'Fish', shellfish: 'Shellfish', soy: 'Soy', sesame: 'Sesame' },
+      allergyOther: 'Anything else? Write it here',
+      s3eyebrow: '03 · Delivery', s3title: 'When shall we bring your first box?',
+      dateHint: 'We deliver on Fridays and Saturdays between 9.00 and 17.00. With a package, your box then arrives every month on the same day.',
+      s4eyebrow: '04 · Your details', s4title: 'Where shall we ring the bell?',
+      firstName: 'First name', lastName: 'Last name', email: 'Email', emailPh: 'you@example.com',
+      phone: 'Phone', phonePh: '6 12345678',
+      postcode: 'Postcode', houseNumber: 'House number', addition: 'Addition', additionPh: 'A',
+      street: 'Street', city: 'Town', manualBtn: 'Not right? Type your address',
+      searching: 'Looking up your address…', notFound: 'We can’t find this address. Check your postcode and house number, or type your address yourself.',
+      lookupDown: 'Address lookup isn’t working right now. Please type your street and town below.',
+      outside: 'For now we only deliver in Haarlem, Haarlemmermeer and surroundings, so we can’t reach this postcode yet. Join the <a href="/waiting-list" style="border-bottom:1px solid #B08D57">waiting list</a> and we’ll let you know as soon as we come closer.',
+      pickAddition: 'Choose your addition:',
+      notes: 'Note for delivery', notesPh: 'For example: ring twice, or use the back door',
+      dob: 'Date of birth', yyyy: 'YYYY', dobHint: 'Our boxes contain alcohol, so we check your age. We don’t store your date of birth.',
+      terms: 'I agree to the <a href="/terms" target="_blank" style="border-bottom:1px solid #B08D57">terms and conditions</a> and the <a href="/privacy" target="_blank" style="border-bottom:1px solid #B08D57">privacy policy</a>, and I agree that my allergy information is used to put together my box.',
+      pay: 'Continue to payment', payHint: 'You only pay for your first box now. With a package, the next boxes are collected automatically; we always email you first.',
+      sumEyebrow: 'Your order', today: 'Today', firstDelivery: 'First delivery', pickDate: 'Still to choose',
+      perBox: 'per box', box: 'Box', alcoholFree: 'Alcohol-free', biteslabel: 'Bites for four',
+      nextSingle: 'A one-time order. Nothing to cancel.',
+      nextThree: 'Then 2 boxes of {p}, each collected one week before delivery. You can pause once.',
+      nextYearly: 'Then 10 boxes of {p}; the 12th box is free. Each collected one week before delivery. Skip up to 2.',
+      plans: {
+        single: ['Single Box', 'One box, one time. Nothing to cancel.'],
+        three: ['3-Months package', '3 boxes, one a month. Pause once.'],
+        yearly: ['Yearly package', '12 boxes, the 12th is free. Skip up to 2.']
+      },
+      free: '12th box free',
+      errors: {
+        plan: 'Choose a box.', date: 'Choose your first delivery day.', name: 'Fill in your first and last name.', email: 'Fill in a valid email address.',
+        phone: 'Fill in a valid phone number.', postcode: 'Fill in a valid postcode, for example 2011 AB.', houseNumber: 'Fill in your house number.',
+        address: 'Fill in your street and town.', outside: 'We don’t deliver to this postcode yet.', dob: 'Fill in a valid date of birth.',
+        under18: 'You must be 18 or older to order.', terms: 'Please agree to the terms to continue.',
+        server: 'Something went wrong starting the payment. Please try again, or email us at info@bubbles-bites.com.'
+      },
+      sending: 'One moment…',
+      doneEyebrow: 'Your order', checking: 'Checking your payment…', checkingText: 'One moment, this usually takes just a few seconds.',
+      paidTitle: 'Thank you{n}.', paidText: 'Your payment went through. Your order number is {o}. We’ll email you a confirmation, and on the day itself we’ll let you know when to expect us.',
+      openTitle: 'Almost there.', openText: 'We haven’t received your payment yet. As soon as it’s complete, you’ll get a confirmation by email. Order number: {o}.',
+      failTitle: 'That didn’t work.', failText: 'Your payment failed or was cancelled, so nothing was charged. You can simply try again.',
+      retry: 'Order again',
+      footerLine: 'Tonight, we pause.', footTerms: 'Terms and conditions', footPrivacy: 'Privacy policy', footFine: 'No 18, no alcohol · © 2026 Bubbles & Bites',
+      termsHref: '/terms', privacyHref: '/privacy', locale: 'en-IE'
+    }
+  };
+
+  // ---------- Language (shared with the rest of the site) ----------
+  const store = { get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} } };
+  let L = store.get('bnb-lang');
+  if (L !== 'nl' && L !== 'en') L = /^en/i.test(navigator.language || '') ? 'en' : 'nl';
+  const t = () => T[L];
+  const money = n => new Intl.NumberFormat(t().locale, { style: 'currency', currency: 'EUR' }).format(n);
+  const delta = n => (n > 0 ? '+ ' : '− ') + money(Math.abs(n));
+  const dateLabel = iso => new Intl.DateTimeFormat(t().locale, { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' }).format(new Date(iso + 'T12:00:00Z'));
+
+  // ---------- State ----------
+  const S = { plan: 'three', af: 'none', bites: false, allergies: [], date: '', addrSource: '', manual: false, lookupKey: '' };
+  const PHONE_CODES = [['+31', 'NL'], ['+32', 'BE'], ['+49', 'DE'], ['+44', 'UK'], ['+33', 'FR'], ['+359', 'BG'], ['+34', 'ES'], ['+39', 'IT'], ['+48', 'PL'], ['+351', 'PT'], ['+353', 'IE'], ['+41', 'CH'], ['+43', 'AT'], ['+46', 'SE'], ['+45', 'DK'], ['+47', 'NO'], ['+30', 'GR'], ['+40', 'RO'], ['+1', 'US/CA']];
+
+  function render() {
+    document.documentElement.lang = L;
+    document.title = (L === 'nl' ? 'Bestel je box' : 'Order your box') + ' · Bubbles & Bites';
+    document.querySelectorAll('[data-t]').forEach(el => { const v = t()[el.dataset.t]; if (typeof v === 'string') el.innerHTML = v; });
+    document.querySelectorAll('[data-t-html]').forEach(el => { el.innerHTML = t()[el.dataset.tHtml]; });
+    document.querySelectorAll('[data-ph]').forEach(el => { el.placeholder = t()[el.dataset.ph]; });
+    document.querySelectorAll('[data-href]').forEach(el => { el.href = t()[el.dataset.href + 'Href']; });
+    document.querySelectorAll('.langs button').forEach(b => b.classList.toggle('on', b.dataset.lang === L));
+    renderPlans(); renderAf(); renderAllergies(); renderDates(); renderSummary();
+    $('bitesPrice').textContent = delta(C.extraBites);
+  }
+
+  function renderPlans() {
+    $('plans').innerHTML = Object.keys(C.plans).map(k => {
+      const [name, note] = t().plans[k];
+      return '<label class="choice' + (S.plan === k ? ' on' : '') + '">' +
+        '<input type="radio" name="plan" value="' + k + '"' + (S.plan === k ? ' checked' : '') + '>' +
+        (k === 'yearly' ? '<span class="badge">' + t().free + '</span>' : '') +
+        '<span class="name">' + name + '</span>' +
+        '<span class="price">' + money(C.plans[k].price) + ' ' + (k === 'single' ? '' : t().perBox) + '</span>' +
+        '<span class="note">' + note + '</span></label>';
+    }).join('');
+  }
+  function renderAf() {
+    $('afRows').innerHTML = Object.keys(C.alcoholFree).map(k => {
+      const d = C.alcoholFree[k].delta;
+      return '<label class="choice row' + (S.af === k ? ' on' : '') + '">' +
+        '<input type="radio" name="af" value="' + k + '"' + (S.af === k ? ' checked' : '') + '>' +
+        '<span class="name">' + t()['af_' + k] + '</span><span class="price">' + (d ? delta(d) : '') + '</span></label>';
+    }).join('');
+    $('bitesRow').classList.toggle('on', S.bites);
+  }
+  function renderAllergies() {
+    const a = t().allergies;
+    $('allergyChips').innerHTML = Object.keys(a).map(k =>
+      '<label class="chip' + (S.allergies.includes(k) ? ' on' : '') + '"><input type="checkbox" value="' + k + '"' + (S.allergies.includes(k) ? ' checked' : '') + '>' + a[k] + '</label>'
+    ).join('');
+  }
+  function renderDates() {
+    const list = C.availableDates();
+    if (S.date && !list.includes(S.date)) S.date = '';
+    $('dates').innerHTML = list.map(d => {
+      const parts = dateLabel(d).split(' ');
+      const day = parts.shift();
+      return '<label class="chip' + (S.date === d ? ' on' : '') + '"><input type="radio" name="date" value="' + d + '"' + (S.date === d ? ' checked' : '') + '>' +
+        '<small>' + day.replace(',', '') + '</small>' + parts.join(' ') + '</label>';
+    }).join('');
+  }
+  function renderSummary() {
+    const p = C.price(S.plan, S.af, S.bites);
+    const plan = C.plans[S.plan];
+    $('sumPlan').textContent = t().plans[S.plan][0];
+    const lines = [[t().box, money(plan.price)]];
+    if (S.af !== 'none') lines.push([t().alcoholFree, delta(C.alcoholFree[S.af].delta)]);
+    if (S.bites) lines.push([t().biteslabel, delta(C.extraBites)]);
+    lines.push([t().firstDelivery, S.date ? dateLabel(S.date) : t().pickDate]);
+    $('sumLines').innerHTML = lines.map(([a, b]) => '<div><dt>' + a + '</dt><dd>' + b + '</dd></div>').join('');
+    $('sumTotal').textContent = money(p.firstBox);
+    $('sumNext').textContent = S.plan === 'single' ? t().nextSingle : t()[S.plan === 'three' ? 'nextThree' : 'nextYearly'].replace('{p}', money(plan.price));
+    $('payBtn').textContent = t().pay + ' · ' + money(p.firstBox);
+  }
+
+  // ---------- Choices ----------
+  $('plans').addEventListener('change', e => { S.plan = e.target.value; renderPlans(); renderSummary(); });
+  $('afRows').addEventListener('change', e => { S.af = e.target.value; renderAf(); renderSummary(); });
+  $('extraBites').addEventListener('change', e => { S.bites = e.target.checked; renderAf(); renderSummary(); });
+  $('allergyChips').addEventListener('change', e => {
+    const k = e.target.value;
+    S.allergies = e.target.checked ? [...S.allergies, k] : S.allergies.filter(x => x !== k);
+    renderAllergies();
+  });
+  $('dates').addEventListener('change', e => { S.date = e.target.value; renderDates(); renderSummary(); $('dateMsg').classList.add('hidden'); });
+  document.querySelectorAll('.langs button').forEach(b => b.addEventListener('click', () => { L = b.dataset.lang; store.set('bnb-lang', L); render(); if (S.addrSource) lookup(true); }));
+
+  $('phoneCode').innerHTML = PHONE_CODES.map(([c, n]) => '<option value="' + c + '">' + n + ' ' + c + '</option>').join('');
+
+  // ---------- Address lookup (PDOK, the official Dutch address register) ----------
+  const normPostcode = v => v.toUpperCase().replace(/[^0-9A-Z]/g, '');
+  let lookupTimer = null;
+  function showAddrMsg(html) { const m = $('addrMsg'); m.innerHTML = html || ''; m.classList.toggle('hidden', !html); }
+  function setFound(street, city, number, addition) {
+    $('street').value = street; $('city').value = city;
+    $('addrFound').innerHTML = '<b>' + street + ' ' + number + (addition ? ' ' + addition : '') + '</b><br>' + formatPostcode(normPostcode($('postcode').value)) + ' ' + city;
+    $('addrFound').classList.remove('hidden');
+    S.addrSource = 'lookup';
+  }
+  const formatPostcode = p => p.length === 6 ? p.slice(0, 4) + ' ' + p.slice(4) : p;
+  function openManual() {
+    S.manual = true; S.addrSource = 'manual';
+    $('manualFields').classList.remove('hidden'); $('manualBtn').classList.add('hidden'); $('addrFound').classList.add('hidden');
+  }
+  $('manualBtn').addEventListener('click', openManual);
+
+  async function lookup(force) {
+    const pc = normPostcode($('postcode').value), nr = $('houseNumber').value.replace(/\D/g, ''), add = $('addition').value.trim().toUpperCase();
+    const key = pc + '|' + nr + '|' + add;
+    if (!force && key === S.lookupKey) return;
+    S.lookupKey = key;
+    $('addrFound').classList.add('hidden');
+    if (S.manual) return;
+    S.addrSource = '';
+    if (!/^\d{4}[A-Z]{2}$/.test(pc) || !nr) { showAddrMsg(''); $('manualBtn').classList.add('hidden'); return; }
+    if (!C.inArea(pc)) { showAddrMsg(t().outside); $('manualBtn').classList.add('hidden'); return; }
+    showAddrMsg('<span style="color:rgba(250,246,238,.78)">' + t().searching + '</span>');
+    try {
+      const url = 'https://api.pdok.nl/bzk/locatieserver/search/v3_1/free?q=*:*&fq=type:adres&fq=postcode:' + pc + '&fq=huisnummer:' + nr +
+        '&fl=straatnaam,huisnummer,huisletter,huisnummertoevoeging,woonplaatsnaam,postcode&rows=50';
+      const r = await fetch(url);
+      if (!r.ok) throw new Error('lookup');
+      const docs = ((await r.json()).response || {}).docs || [];
+      if (key !== S.lookupKey) return; // typed on meanwhile
+      const extra = d => ((d.huisletter || '') + (d.huisnummertoevoeging ? (d.huisletter ? '-' : '') + d.huisnummertoevoeging : '')).toUpperCase();
+      const flat = s => s.replace(/[^0-9A-Z]/g, '');
+      let match = docs.filter(d => flat(extra(d)) === flat(add));
+      if (!match.length && !add && docs.length > 1) {
+        // Several addresses at this number (e.g. 12A, 12B): let them pick one.
+        const opts = [...new Set(docs.map(extra))].sort();
+        showAddrMsg('<span style="color:#FAF6EE">' + t().pickAddition + '</span> ' + opts.map(o => '<button type="button" class="link" data-add="' + o + '" style="margin:6px 10px 0 0">' + nr + (o ? ' ' + o : '') + '</button>').join(''));
+        $('addrMsg').querySelectorAll('[data-add]').forEach(b => b.addEventListener('click', () => { $('addition').value = b.dataset.add; lookup(true); }));
+        $('manualBtn').classList.remove('hidden');
+        return;
+      }
+      if (!match.length && docs.length === 1 && !add) match = docs;
+      if (!match.length) { showAddrMsg(t().notFound); $('manualBtn').classList.remove('hidden'); return; }
+      showAddrMsg('');
+      setFound(match[0].straatnaam, match[0].woonplaatsnaam, nr, add);
+      $('manualBtn').classList.remove('hidden');
+    } catch (e) {
+      if (key !== S.lookupKey) return;
+      showAddrMsg(t().lookupDown); openManual();
+    }
+  }
+  ['postcode', 'houseNumber', 'addition'].forEach(id => $(id).addEventListener('input', () => {
+    if (id === 'houseNumber') $(id).value = $(id).value.replace(/\D/g, '');
+    clearTimeout(lookupTimer); lookupTimer = setTimeout(() => lookup(false), 450);
+  }));
+  $('postcode').addEventListener('blur', () => { const p = normPostcode($('postcode').value); if (p.length === 6) $('postcode').value = formatPostcode(p); });
+
+  // Date of birth: digits only, jump to the next box when full.
+  ['dobD', 'dobM', 'dobY'].forEach((id, i, all) => $(id).addEventListener('input', e => {
+    const max = i === 2 ? 4 : 2; e.target.value = e.target.value.replace(/\D/g, '').slice(0, max);
+    if (e.target.value.length === max && all[i + 1]) $(all[i + 1]).focus();
+  }));
+  function age() {
+    const D = +$('dobD').value, M = +$('dobM').value, Y = +$('dobY').value;
+    if (!D || !M || $('dobY').value.length !== 4 || Y < 1900) return null;
+    const b = new Date(Y, M - 1, D);
+    if (b.getFullYear() !== Y || b.getMonth() !== M - 1 || b.getDate() !== D || b > new Date()) return null;
+    const n = new Date(); let a = n.getFullYear() - Y;
+    if (n.getMonth() < M - 1 || (n.getMonth() === M - 1 && n.getDate() < D)) a--;
+    return a;
+  }
+
+  function fullPhone() {
+    let n = $('phone').value.replace(/\D/g, '');
+    const code = $('phoneCode').value;
+    if (n.startsWith('00')) return '+' + n.slice(2);
+    if (n.startsWith('0')) n = n.slice(1);
+    return code + n;
+  }
+
+  // ---------- Send the order ----------
+  function fail(msg, el) {
+    const m = $('formMsg'); m.textContent = msg; m.classList.remove('hidden');
+    if (el) { el.closest('.field') && el.closest('.field').classList.add('bad'); el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    return false;
+  }
+  document.querySelectorAll('.field input, .field select').forEach(el => el.addEventListener('input', () => { const f = el.closest('.field'); f && f.classList.remove('bad'); $('formMsg').classList.add('hidden'); }));
+
+  function sendToJotform(o, res) {
+    const fd = new FormData(), id = C.jotformId;
+    fd.append('formID', id); fd.append('simple_spc', id + '-' + id);
+    fd.append('q5_name[first]', o.firstName); fd.append('q5_name[last]', o.lastName);
+    fd.append('q6_email', o.email); fd.append('q7_phoneNumber[full]', o.phone);
+    fd.append('q4_address[addr_line1]', o.street); fd.append('q4_address[addr_line2]', o.houseNumber + (o.addition ? ' ' + o.addition : ''));
+    fd.append('q4_address[city]', o.city); fd.append('q4_address[postal]', formatPostcode(o.postcode));
+    fd.append('q10_addressFound', o.addressSource); fd.append('q11_deliveryNotes', o.deliveryNotes);
+    fd.append('q12_boxPlan', C.plans[o.plan].jotform);
+    const [y, m, d] = o.firstDelivery.split('-');
+    fd.append('q13_firstDelivery[month]', m); fd.append('q13_firstDelivery[day]', d); fd.append('q13_firstDelivery[year]', y);
+    fd.append('q14_deliveryDay', C.weekdayName(o.firstDelivery));
+    fd.append('q16_alcoholfreeOption', C.alcoholFree[o.alcoholFree].jotform);
+    fd.append('q17_extraBites', o.extraBites ? 'Yes' : 'No');
+    fd.append('q18_allergies', o.allergies || 'None');
+    fd.append('q19_18Confirmed', 'Yes'); fd.append('q20_termsAccepted', 'Yes');
+    fd.append('q21_firstPayment', res.amount); fd.append('q22_orderNumber', res.order);
+    return fetch('https://submit.jotform.com/submit/' + id + '/', { method: 'POST', mode: 'no-cors', body: fd, keepalive: true }).catch(() => {});
+  }
+
+  $('orderForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    $('formMsg').classList.add('hidden');
+    const E = t().errors;
+    const pc = normPostcode($('postcode').value);
+    if (!S.plan) return fail(E.plan);
+    if (!S.date) { $('dateMsg').textContent = E.date; $('dateMsg').classList.remove('hidden'); return fail(E.date, $('dates')); }
+    if (!$('firstName').value.trim() || !$('lastName').value.trim()) return fail(E.name, $('firstName'));
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test($('email').value.trim())) return fail(E.email, $('email'));
+    const phone = fullPhone();
+    if (!/^\+\d{8,15}$/.test(phone)) return fail(E.phone, $('phone'));
+    if (!/^\d{4}[A-Z]{2}$/.test(pc)) return fail(E.postcode, $('postcode'));
+    if (!C.inArea(pc)) return fail(E.outside, $('postcode'));
+    if (!$('houseNumber').value) return fail(E.houseNumber, $('houseNumber'));
+    if (!S.addrSource && !S.manual) openManual();
+    if (!$('street').value.trim() || !$('city').value.trim()) { openManual(); return fail(E.address, $('street')); }
+    const a = age();
+    if (a === null) return fail(E.dob, $('dobD'));
+    if (a < 18) return fail(E.under18, $('dobD'));
+    if (!$('terms').checked) return fail(E.terms, $('terms'));
+
+    const allergyNames = S.allergies.map(k => T.en.allergies[k]);
+    const other = $('allergyOther').value.trim();
+    const o = {
+      plan: S.plan, alcoholFree: S.af, extraBites: S.bites,
+      allergies: [...allergyNames, other].filter(Boolean).join(', '),
+      firstDelivery: S.date,
+      firstName: $('firstName').value.trim(), lastName: $('lastName').value.trim(), email: $('email').value.trim(), phone,
+      postcode: pc, houseNumber: $('houseNumber').value, addition: $('addition').value.trim().toUpperCase(),
+      street: $('street').value.trim(), city: $('city').value.trim(), addressSource: S.addrSource || 'manual',
+      deliveryNotes: $('notes').value.trim(), adult: true, terms: true, lang: L
+    };
+
+    const btn = $('payBtn'); btn.disabled = true; btn.textContent = t().sending;
+    try {
+      const r = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(o) });
+      const res = await r.json().catch(() => ({}));
+      if (!r.ok || !res.checkoutUrl) throw res;
+      try { sessionStorage.setItem('bnb-order', JSON.stringify({ order: res.order, payment: res.paymentId, name: o.firstName })); } catch (err) {}
+      const sent = sendToJotform(o, res);
+      const go = () => { window.location.href = res.checkoutUrl; };
+      Promise.race([sent, new Promise(r2 => setTimeout(r2, 2500))]).then(go, go);
+    } catch (err) {
+      btn.disabled = false; renderSummary();
+      if (err && err.fields && err.fields.includes('firstDelivery')) { renderDates(); return fail(E.date, $('dates')); }
+      fail(E.server);
+    }
+  });
+
+  // ---------- Coming back from Mollie ----------
+  async function showDone(orderParam) {
+    $('orderView').classList.add('hidden'); $('doneView').classList.remove('hidden');
+    let saved = {}; try { saved = JSON.parse(sessionStorage.getItem('bnb-order') || '{}'); } catch (e) {}
+    const name = saved.name ? ', ' + saved.name : '';
+    const order = saved.order || orderParam;
+    const set = (title, text, retry) => {
+      $('doneEyebrow').textContent = t().doneEyebrow + (order ? ' · ' + order : '');
+      $('doneTitle').textContent = title; $('doneText').textContent = text;
+      $('doneRetry').classList.toggle('hidden', !retry);
+    };
+    set(t().checking, t().checkingText);
+    if (!saved.payment || saved.order !== orderParam) return set(t().openTitle, t().openText.replace('{o}', order));
+    for (let i = 0; i < 6; i++) {
+      try {
+        const r = await fetch('/api/order-status?payment=' + encodeURIComponent(saved.payment));
+        const s = (await r.json()).status;
+        if (s === 'paid') return set(t().paidTitle.replace('{n}', name), t().paidText.replace('{o}', order));
+        if (['failed', 'canceled', 'expired'].includes(s)) return set(t().failTitle, t().failText, true);
+      } catch (e) {}
+      await new Promise(r => setTimeout(r, 1500));
+    }
+    set(t().openTitle, t().openText.replace('{o}', order));
+  }
+
+  render();
+  const q = new URLSearchParams(location.search).get('order');
+  if (q) showDone(q);
+})();
+</script>
+</body>
+</html>
